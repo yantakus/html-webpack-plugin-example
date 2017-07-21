@@ -1,0 +1,13 @@
+[ignore]
+.*/node_modules/react-side-effect/.*
+[include]
+[libs]
+
+[options]
+module.system=haste
+
+module.system.node.resolve_dirname=node_modules
+module.system.node.resolve_dirname=app
+
+module.name_mapper='^~\/\(.*\)$' -> '<PROJECT_ROOT>/app/\1'
+module.name_mapper='.*\(.?scss\)' -> 'CSSModule'

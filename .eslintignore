@@ -1,0 +1,7 @@
+/flow-typed/**
+/coverage/**
+internals/scripts/**
+internals/generators/**
+internals/dev-preamble.js
+postcss.config.js
+/build/**
