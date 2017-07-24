@@ -7,8 +7,6 @@
 import { getAsyncInjectors } from 'utils/asyncInjectors';
 import type { Store } from 'types/common';
 import storage from 'store';
-import { EventTypes } from 'redux-segment';
-import moment from 'moment';
 
 const errorLoading = (err) => {
   console.error('Dynamic page loading failed', err); // eslint-disable-line no-console
@@ -19,8 +17,6 @@ const loadModule = (cb) => (componentModule) => {
     cb(null, componentModule.default);
   }
 };
-
-const USER_IDENTITY = 'Lift/User/USER_IDENTITY';
 
 export default function createRoutes(store: Store) {
   // Create reusable async injectors using getAsyncInjectors factory

@@ -22,7 +22,7 @@ const transformOptions = (data, includeALL = false, valueField = 'slug') => {
       if (valueField === 'slug' && Object.prototype.hasOwnProperty.call(item, 'slug')) {
         transformedData.push({
           value: item.slug,
-          label: item.name,
+          label: item.name ? item.name : item.slug,
         });
       } else if (Object.prototype.hasOwnProperty.call(item, '_id') && Object.prototype.hasOwnProperty.call(item, 'name')) {
         transformedData.push({
