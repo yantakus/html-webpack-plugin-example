@@ -46,7 +46,7 @@ export default function createRoutes(store: Store) {
       path,
       name,
       getComponent(nextState: Object, cb: Function) {
-        const importModules = Promise.all([component, sagas]);
+        const importModules = Promise.all([component(), sagas && sagas()]);
         const renderRoute = loadModule(cb);
         importModules.then(([loadedComponent, loadedSagas]) => {
           if (loadedSagas) {
@@ -63,7 +63,7 @@ export default function createRoutes(store: Store) {
       // onEnter gets called when we visit a route
       // childRoute changes do not trigger onEnter, which is a desired behavior
       if (sagas) {
-        const importModules = sagas;
+        const importModules = sagas();
         if (importModules != null) {
           importModules.then((importedSagas) => {
             this.loadedSagas = injectSagas(importedSagas.default);
@@ -76,6 +76,7 @@ export default function createRoutes(store: Store) {
       if (requiredAuth && !storage.get('user')) {
         replace('/login');
       }
+
       callback();
     }.bind(route);
     if (cancelSagas) {
@@ -92,9 +93,7 @@ export default function createRoutes(store: Store) {
     if (indexComponent) {
       route.indexRoute = {
         getComponent(partialNextState: Object, cb: Function) {
-          const importModules = Promise.all([
-            indexComponent,
-          ]);
+          const importModules = Promise.all([indexComponent()]);
 
           const renderRoute = loadModule(cb);
 
@@ -116,17 +115,12 @@ export default function createRoutes(store: Store) {
     createRoute(
       '/',
       'home',
-      import('pages/Home'),
+      () => import('pages/Home'),
     ),
     createRoute(
       '/page2',
       'page2',
-      import('pages/Page2'),
-    ),
-    createRoute(
-      '*',
-      'notfound',
-      import('pages/404')
+      () => import('pages/Page2'),
     ),
   ];
 
