@@ -1,7 +1,7 @@
 // @flow
 
 import React, { Component } from 'react';
-import { Link } from 'react-router';
+import Link from 'components/Link';
 
 class Page2 extends Component {
   render() {

@@ -48,6 +48,8 @@ module.exports = require('./webpack.base.babel')({
       relativePaths: false,
       publicPath: '/',
 
+      autoUpdate: 1000 * 60 * 2, // check for updates every 2 minutes and fire `onUpdateReady` event
+
       // No need to cache .htaccess. See http://mxs.is/googmp,
       // this is applied before any match in `caches` section
       excludes: ['.htaccess'],
@@ -63,6 +65,11 @@ module.exports = require('./webpack.base.babel')({
 
       // Removes warning for about `additional` section usage
       safeToUseOptionalCaches: true,
+
+      ServiceWorker: {
+        events: true,
+        navigateFallbackURL: '/',
+      },
 
       AppCache: false,
     }),
